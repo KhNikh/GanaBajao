@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-spotify-black text-white;
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-spotify-green text-black font-bold py-3 px-8 rounded-full hover:scale-105 transition-transform duration-150 active:scale-100;
+  }
+  .btn-secondary {
+    @apply border border-spotify-light text-white font-bold py-3 px-8 rounded-full hover:border-white transition-colors duration-150;
+  }
+  .card-hover {
+    @apply bg-spotify-card hover:bg-spotify-hover transition-colors duration-200 cursor-pointer rounded-md p-4;
+  }
+  .sidebar-link {
+    @apply flex items-center gap-4 text-spotify-light hover:text-white py-2 px-4 rounded transition-colors duration-150 cursor-pointer;
+  }
+  .sidebar-link.active {
+    @apply text-white;
+  }
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #1DB954 var(--progress, 0%), #3E3E3E var(--progress, 0%));
+  border-radius: 4px;
+  height: 4px;
+  transition: background 0.1s;
+}
+input[type="range"]:hover::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #1ed760 var(--progress, 0%), #535353 var(--progress, 0%));
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  margin-top: -4.5px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+input[type="range"]:hover::-webkit-slider-thumb,
+input[type="range"]:active::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+.animate-spin-slow.paused {
+  animation-play-state: paused;
+}
