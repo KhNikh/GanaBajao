@@ -2,6 +2,20 @@
 
 A full-stack music streaming platform with Spotify-like smart recommendations, built with React, Node.js, and SQLite.
 
+## ⚡ Quick Start
+
+```bash
+git clone https://github.com/KhNikh/GanaBajao.git
+cd GanaBajao
+npm start
+```
+
+Then open [http://localhost:5173](http://localhost:5173) and log in:
+- **Email:** demo@gaanabajao.com  
+- **Password:** demo123
+
+That's it! 🎉
+
 ## ✨ Features
 
 - 🎤 **Stream Music** - Play songs from JioSaavn or your local library
@@ -45,30 +59,51 @@ git clone https://github.com/KhNikh/GanaBajao.git
 cd GanaBajao
 ```
 
-### 2. Backend Setup
+### 2. Run the app (one command!)
+```bash
+npm start
+```
+
+That's it! The script will automatically:
+- ✅ Install backend & frontend dependencies (if needed)
+- ✅ Create `.env` file from `.env.example` (if needed)
+- ✅ Start both backend (port 5000) and frontend (port 5173)
+- ✅ Show you the app URL to open in browser
+
+### 3. Access the app
+The terminal will show:
+```
+📱 Local:    http://localhost:5173
+🌐 Network:  http://YOUR_IP:5173
+👤 Demo:     demo@gaanabajao.com / demo123
+```
+
+Just open `http://localhost:5173` in your browser!
+
+### 4. Stop the app
+Press `Ctrl+C` in the terminal - it will cleanly stop both services.
+
+---
+
+## 💡 Alternative: Manual Setup (if you prefer)
+
+If you want to run backend and frontend separately in different terminals:
+
+### Terminal 1 - Backend
 ```bash
 cd backend
 npm install
-
-# Create .env file
-cp .env.example .env
-# Edit .env if needed (default values work for local development)
-
-# Start backend (runs on http://localhost:5000)
-npm run dev
+npm run dev  # or: npm start
 ```
 
-### 3. Frontend Setup (in a new terminal)
+### Terminal 2 - Frontend
 ```bash
 cd frontend
 npm install
-
-# Start frontend (runs on http://localhost:5173)
 npm run dev
 ```
 
-### 4. Access the app
-Open [http://localhost:5173](http://localhost:5173) in your browser
+Then open `http://localhost:5173`
 
 ## 📝 Demo Account
 
@@ -136,20 +171,23 @@ GanaBajao/
 - `liked_songs` - Liked songs per user
 - **`play_history`** - Tracks when/how users play songs (for recommendations)
 
-## 🔧 Available Scripts
+## � Available Scripts
 
-### Backend
+### Main Command
 ```bash
-npm run dev      # Start development server with nodemon
-npm start        # Start production server
+npm start              # 🎵 Start everything! Backend + Frontend
+# or: bash start.sh
 ```
 
-### Frontend
+### Individual Commands
 ```bash
-npm run dev      # Start Vite dev server
-npm run build    # Build for production
-npm run preview  # Preview production build
-npm run lint     # Run ESLint
+# Install dependencies
+npm run install:all    # Install backend & frontend deps
+
+# Development (separate terminals)
+npm run dev:backend    # Start backend only
+npm run dev:frontend   # Start frontend only
+npm run dev            # Start both (needs concurrently)
 ```
 
 ## 🌐 API Endpoints
@@ -180,7 +218,49 @@ npm run lint     # Run ESLint
 - `GET /api/saavn/search?query=...` - Search JioSaavn
 - `GET /api/saavn/trending` - Trending from JioSaavn
 
-## 🚀 Deployment
+## � Troubleshooting
+
+### Port already in use
+If you get "port 5000/5173 already in use":
+```bash
+# Kill process using port 5000 (backend)
+lsof -ti:5000 | xargs kill -9
+
+# Kill process using port 5173 (frontend)
+lsof -ti:5173 | xargs kill -9
+
+# Then run again
+npm start
+```
+
+### Dependencies not installing
+```bash
+# Clear npm cache
+npm cache clean --force
+
+# Remove existing node_modules
+rm -rf backend/node_modules frontend/node_modules
+
+# Try again
+npm start
+```
+
+### Check logs
+If something fails, check the log files generated:
+```bash
+tail -f backend.log    # Backend errors
+tail -f frontend.log   # Frontend errors
+```
+
+### Fresh start
+```bash
+# Remove everything and start fresh
+rm -rf backend/node_modules frontend/node_modules backend/.env
+npm install:all
+npm start
+```
+
+## 🚀 Production Deploy
 
 ### Deploy Backend (Heroku, Railway, etc.)
 ```bash
